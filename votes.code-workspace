@@ -1,0 +1,10 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.pythonPath": "/home/hinha/anaconda3/envs/covidTest/bin/python"
+  }
+}

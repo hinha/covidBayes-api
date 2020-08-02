@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+  server_test:
+    container_name: api_server_bayes
+    image: api-bayes:1.0
+    tty: true
+    restart: always
+    volumes:
+      - ".:/app"
+    ports:
+      - "8089:8000"
