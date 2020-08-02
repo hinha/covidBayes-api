@@ -1,7 +1,6 @@
 import random
 import asyncio
 import requests
-import aiohttp
 import json
 import pandas as pd
 
