@@ -71,4 +71,4 @@ async def dataJSON(request):
 # http://api.coronatracker.com/v3/analytics/newcases/country?countryCode=ID&startDate=2020-04-01&endDate=2020-05-01
 
 
-app.run(host="0.0.0.0", port="8089")
+app.run(host="0.0.0.0")
