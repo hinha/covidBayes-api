@@ -3,30 +3,36 @@ from sanic import Sanic
 from sanic.response import json
 from requestdata import scrape
 from datasets import BayesCovid
+from sanic_cors import CORS, cross_origin
 
 app = Sanic(__name__)
+CORS(app, supports_credentials=False)
 
 
+@cross_origin(
+    app,
+    allow_headers=["Content-Type", "Authorization",],
+    origins=["Access-Control-Allow-Origin", "*"],
+)
 @app.route("/api/v1/search", methods=["GET"])
 async def search(request):
     try:
         query = request.args
         kota = query.get("kota", None)
         if not kota:
-            return json({"message": "missing parameter query"}, 400)
+            return json({"message": "missing parameter query"}, 200)
 
         dir_path = os.path.dirname(os.path.realpath(__file__))
         file1 = os.path.isfile(
-            dir_path + "src/result/harian_{}.csv".format(kota.lstrip().lower())
+            dir_path + "/result/harian_{}.csv".format(kota.lstrip().lower())
         )
         file2 = os.path.isfile(
-            dir_path + "src/result/rawan_{}.csv".format(kota.lstrip().lower())
+            dir_path + "/result/rawan_{}.csv".format(kota.lstrip().lower())
         )
 
+        print(file1, file2)
         if not file1 and not file1:
             scrape(kota)
-            if not file1 and not file1:
-                return json({"message": "not valid query parameter"}, 400)
 
         return json({"message": "ok"})
     except Exception as e:
@@ -34,6 +40,11 @@ async def search(request):
         return json({"message": "something went wrong"}, 500)
 
 
+@cross_origin(
+    app,
+    allow_headers=["Content-Type", "Authorization",],
+    origins=["Access-Control-Allow-Origin", "*"],
+)
 @app.route("/api/v1/data.json", methods=["GET"])
 async def dataJSON(request):
     query = request.args
@@ -41,7 +52,7 @@ async def dataJSON(request):
         kota = query.get("kota", None)
         kategori = query.get("kategori", None)
         if not kota:
-            return json({"message": "missing parameter query"}, 400)
+            return json({"message": "missing parameter query"}, 200)
 
         resultOffset = query.get("resultOffset", False)
         dataTable = query.get("dataTable", None)

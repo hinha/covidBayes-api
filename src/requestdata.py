@@ -33,16 +33,14 @@ class Covid:
             print(ex)
             resp = self.get_body(ex)
 
-            if not resp:
-                return None
+            if resp:
+                if resp["features"]:
 
-            if resp["features"]:
+                    for data in resp["features"]:
+                        init = data["attributes"]
+                        dataTemp.append(init)
 
-                for data in resp["features"]:
-                    init = data["attributes"]
-                    dataTemp.append(init)
-
-            point += 50
+                point += 50
 
         dtframe = pd.DataFrame(dataTemp)
         dtframe.to_csv(
