@@ -17,11 +17,12 @@ async def search(request):
 
         dir_path = os.path.dirname(os.path.realpath(__file__))
         file1 = os.path.isfile(
-            dir_path + "/result/harian_{}.csv".format(kota.lstrip().lower())
+            dir_path + "src/result/harian_{}.csv".format(kota.lstrip().lower())
         )
         file2 = os.path.isfile(
-            dir_path + "/result/rawan_{}.csv".format(kota.lstrip().lower())
+            dir_path + "src/result/rawan_{}.csv".format(kota.lstrip().lower())
         )
+
         if not file1 and not file1:
             scrape(kota)
             if not file1 and not file1:

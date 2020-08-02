@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import operator
@@ -6,14 +7,17 @@ from functools import reduce
 from math import log, log10
 
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+
 class BayesCovid:
     def __init__(self, kategoriRawan, province):
         self.kategoriRawan = kategoriRawan
         self.datasetsHarian = pd.read_csv(
-            "result/harian_{}.csv".format(province.lstrip().lower())
+            "{}/result/harian_{}.csv".format(dir_path, province.lstrip().lower())
         )
         self.datasetsRawan = pd.read_csv(
-            "result/rawan_{}.csv".format(province.lstrip().lower())
+            "{}/result/rawan_{}.csv".format(dir_path, province.lstrip().lower())
         )
         self.labelRow = []
 

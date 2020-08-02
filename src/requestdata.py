@@ -2,7 +2,10 @@ import random
 import asyncio
 import requests
 import json
+import os
 import pandas as pd
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 class Covid:
@@ -40,8 +43,11 @@ class Covid:
                     dataTemp.append(init)
 
             point += 50
+
         dtframe = pd.DataFrame(dataTemp)
-        dtframe.to_csv("result/harian_{}.csv".format(self.query_city.lstrip().lower()))
+        dtframe.to_csv(
+            "{}/result/harian_{}.csv".format(dir_path, self.query_city.lstrip().lower())
+        )
 
     def covidKecamatanRawan(self):
         point = 0
@@ -62,7 +68,9 @@ class Covid:
 
             point += 50
         dtframe = pd.DataFrame(dataTemp)
-        dtframe.to_csv("result/rawan_{}.csv".format(self.query_city.lstrip().lower()))
+        dtframe.to_csv(
+            "{}/result/rawan_{}.csv".format(dir_path, self.query_city.lstrip().lower())
+        )
 
     def get_body(self, *args, **kwargs):
         """Retrieve text from url. Return text as string or None if no data present """
